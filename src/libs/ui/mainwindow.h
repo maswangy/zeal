@@ -32,8 +32,6 @@ class QxtGlobalShortcut;
 
 class QModelIndex;
 class QSystemTrayIcon;
-class QTabBar;
-class QTimer;
 
 namespace Zeal {
 
@@ -52,7 +50,7 @@ namespace Ui {
 class MainWindow;
 } // namespace Ui
 
-struct TabState;
+class Tab;
 
 class MainWindow : public QMainWindow
 {
@@ -72,46 +70,27 @@ protected:
     void changeEvent(QEvent *event) override;
     void closeEvent(QCloseEvent *event) override;
     bool eventFilter(QObject *object, QEvent *event) override;
-    void keyPressEvent(QKeyEvent *keyEvent) override;
 
 private slots:
     void applySettings();
-    void openDocset(const QModelIndex &index);
-    void queryCompleted();
     void closeTab(int index = -1);
     void duplicateTab(int index);
 
 private:
-    void syncTreeView();
-    void syncToc();
-    void setupSearchBoxCompletions();
     void setupTabBar();
 
-    TabState *currentTabState() const;
-
-    QString docsetName(const QUrl &url) const;
-    QIcon docsetIcon(const QString &docsetName) const;
+    Zeal::WidgetUi::Tab *currentTab() const;
 
     void createTrayIcon();
     void removeTrayIcon();
 
-    QList<TabState *> m_tabStates;
-
     Ui::MainWindow *ui = nullptr;
     Zeal::Core::Application *m_application = nullptr;
     Zeal::Core::Settings *m_settings = nullptr;
-    Zeal::Registry::ListModel *m_zealListModel = nullptr;
-
-    QMenu *m_backMenu = nullptr;
-    QMenu *m_forwardMenu = nullptr;
 
     QxtGlobalShortcut *m_globalShortcut = nullptr;
 
-    QTabBar *m_tabBar = nullptr;
-
     QSystemTrayIcon *m_trayIcon = nullptr;
-
-    QTimer *m_openDocsetTimer = nullptr;
 };
 
 } // namespace WidgetUi

@@ -4,6 +4,7 @@ list(APPEND Widgets_SOURCES
     widgets/searchablewebview.cpp
     widgets/searchedit.cpp
     widgets/shortcutedit.cpp
+    widgets/tab.cpp
     widgets/toolbarframe.cpp
     widgets/webview.cpp
 )
@@ -13,6 +14,7 @@ set(Ui_FORMS
     docsetsdialog.ui
     mainwindow.ui
     settingsdialog.ui
+    widgets/tab.ui
 )
 
 add_library(Ui

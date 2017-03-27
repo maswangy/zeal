@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Zeal::WidgetUi::Tab</class>
+ <widget class="QWidget" name="Zeal::WidgetUi::Tab">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QSplitter" name="splitter">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="childrenCollapsible">
+      <bool>false</bool>
+     </property>
+     <widget class="QWidget" name="layoutWidget">
+      <layout class="QVBoxLayout" name="resultPane">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="Zeal::WidgetUi::ToolBarFrame" name="searchEditWidget" native="true">
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="Zeal::WidgetUi::SearchEdit" name="lineEdit">
+            <property name="placeholderText">
+             <string>Enter your query</string>
+            </property>
+            <property name="clearButtonEnabled">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QSplitter" name="tocSplitter">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <widget class="QTreeView" name="treeView">
+          <property name="frameShape">
+           <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="uniformRowHeights">
+           <bool>true</bool>
+          </property>
+          <attribute name="headerVisible">
+           <bool>false</bool>
+          </attribute>
+         </widget>
+         <widget class="QListView" name="tocListView">
+          <property name="frameShape">
+           <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="horizontalScrollBarPolicy">
+           <enum>Qt::ScrollBarAlwaysOff</enum>
+          </property>
+          <property name="uniformItemSizes">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="layoutWidget_2">
+      <layout class="QVBoxLayout" name="viewInfo">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="Zeal::WidgetUi::ToolBarFrame" name="navigationBar" native="true">
+         <layout class="QHBoxLayout" name="toolbox">
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QToolButton" name="backButton">
+            <property name="toolTip">
+             <string>Go back one page</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QToolButton::menu-indicator { image: none; }</string>
+            </property>
+            <property name="text">
+             <string>←</string>
+            </property>
+            <property name="icon">
+             <iconset theme="go-previous">
+              <normaloff>../</normaloff>../</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="forwardButton">
+            <property name="toolTip">
+             <string>Go forward one page</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QToolButton::menu-indicator { image: none; }</string>
+            </property>
+            <property name="text">
+             <string>→</string>
+            </property>
+            <property name="icon">
+             <iconset theme="go-next">
+              <normaloff>../</normaloff>../</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>TextLabel</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="openUrlButton">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Open URL</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="Zeal::WidgetUi::SearchableWebView" name="webView" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+  <action name="actionBack">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset theme="go-previous">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Back</string>
+   </property>
+  </action>
+  <action name="actionForward">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset theme="go-next">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Forward</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Zeal::WidgetUi::SearchableWebView</class>
+   <extends>QWidget</extends>
+   <header>ui/widgets/searchablewebview.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Zeal::WidgetUi::ToolBarFrame</class>
+   <extends>QWidget</extends>
+   <header>ui/widgets/toolbarframe.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Zeal::WidgetUi::SearchEdit</class>
+   <extends>QLineEdit</extends>
+   <header>ui/widgets/searchedit.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

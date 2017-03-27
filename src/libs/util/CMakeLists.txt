@@ -4,6 +4,7 @@ set(CMAKE_AUTOMOC OFF)
 add_library(Util
     plist.cpp
     sqlitedatabase.cpp
+    tracehelper.cpp
     version.cpp
 )
 
