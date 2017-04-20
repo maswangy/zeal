@@ -41,14 +41,18 @@ public:
     bool isOpen() const;
     QStringList tables();
 
-    bool execute(const QString &queryStr);
+    bool prepare(const QString &sql);
     bool next();
+
+    bool execute(const QString &sql);
 
     QVariant value(int index) const;
 
     QString lastError() const;
 
     sqlite3 *handle() const;
+
+    static QString libraryVersion();
 
 private:
     void close();

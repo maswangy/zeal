@@ -59,7 +59,7 @@ QStringList SQLiteDatabase::tables()
     const QString sql = QLatin1String("SELECT name FROM sqlite_master WHERE type='table' UNION ALL "
                                       "SELECT name FROM sqlite_temp_master WHERE type='table'");
 
-    if (!sql.isEmpty() && execute(sql)) {
+    if (!sql.isEmpty() && prepare(sql)) {
         while (next())
             res.append(value(0).toString());
     }
@@ -67,7 +67,7 @@ QStringList SQLiteDatabase::tables()
     return res;
 }
 
-bool SQLiteDatabase::execute(const QString &queryStr)
+bool SQLiteDatabase::prepare(const QString &sql)
 {
     if (m_db == nullptr) {
         return false;
@@ -81,7 +81,7 @@ bool SQLiteDatabase::execute(const QString &queryStr)
 
     sqlite3_mutex_enter(sqlite3_db_mutex(m_db));
     const void *pzTail = nullptr;
-    const int res = sqlite3_prepare16_v2(m_db, queryStr.constData(), (queryStr.size() + 1) * 2,
+    const int res = sqlite3_prepare16_v2(m_db, sql.constData(), (sql.size() + 1) * 2,
                                          &m_stmt, &pzTail); // 2 = sizeof(QChar)
     sqlite3_mutex_leave(sqlite3_db_mutex(m_db));
 
@@ -122,6 +122,26 @@ bool SQLiteDatabase::next()
     }
 
     return false;
+}
+
+bool SQLiteDatabase::execute(const QString &sql)
+{
+    if (m_db == nullptr) {
+        return false;
+    }
+
+    char *errmsg = nullptr;
+    const int rc = sqlite3_exec(m_db, sql.toUtf8(), NULL, NULL, &errmsg);
+
+    if (rc != SQLITE_OK) {
+        if (errmsg) {
+            m_lastError = QString::fromLocal8Bit(errmsg);
+            sqlite3_free(errmsg);
+        }
+        return false;
+    }
+
+    return true;
 }
 
 QVariant SQLiteDatabase::value(int index) const
@@ -182,4 +202,9 @@ void SQLiteDatabase::updateLastError()
 sqlite3 *SQLiteDatabase::handle() const
 {
     return m_db;
+}
+
+QString SQLiteDatabase::libraryVersion()
+{
+    return QString::fromLocal8Bit(sqlite3_libversion());
 }
